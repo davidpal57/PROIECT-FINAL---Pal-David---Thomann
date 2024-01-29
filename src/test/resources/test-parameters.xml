@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1">
+    <parameter name="browserChoice" value="none"/>
+<!--    <test name="AfisareLinkListTest">-->
+<!--        <parameter name="linkFromListP" value="Top-Seller"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.AfisareLinkListTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="SchimbareLimbaSauUnitateMonetara">
+        <parameter name="languageSelectedP" value="IT"/>
+        <parameter name="currencySelectedP" value="¥"/>
+        <classes>
+            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>
+        </classes>
+    </test>
+</suite>
