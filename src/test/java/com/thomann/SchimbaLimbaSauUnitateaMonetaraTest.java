@@ -36,6 +36,7 @@ public class SchimbaLimbaSauUnitateaMonetaraTest {
     @Test
     @Parameters({"languageSelectedP", "currencySelectedP"})
     public void chooseCountry(String languageSelected, String currencySelected) {
+        int consentPopUp = 0;
         WebElement countryMenuButton = driver.findElement(By.className("shop-country"));
         countryMenuButton.click(); sleep(2000);
         WebElement chooseCountryButton = driver.findElement(By.xpath("//div[@class='country-selection']//div[2]"));
@@ -66,13 +67,20 @@ public class SchimbaLimbaSauUnitateaMonetaraTest {
 //        }
 
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
             wait.until(ExpectedConditions.elementToBeClickable(cookiesButton));
+            if(cookiesButton.isDisplayed())
+                consentPopUp++;
             cookiesButton.click();
-            sleep(4000);
+            sleep(2000);
         } catch (Exception e) {
-            WebElement languageAndCurrencyDisplayed = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[1]/div[1]/div[3]/div/div[1]/span"));
+            System.out.println("Consent popup was not displayed.");
+        }
+        finally {
+            if(consentPopUp>0)
+                System.out.println("Consent popup was closed.");
+            WebElement languageAndCurrencyDisplayed = driver.findElement(By.xpath("//div[@role=\"banner\"]/div[3]/div/div[1]"));
             Assert.assertTrue(languageAndCurrencyDisplayed.getText().contains(languageSelected));
             Assert.assertTrue(languageAndCurrencyDisplayed.getText().contains(currencySelected));
         }

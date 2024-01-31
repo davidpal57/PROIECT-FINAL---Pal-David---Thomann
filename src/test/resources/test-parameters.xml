@@ -9,11 +9,25 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="SchimbareLimbaSauUnitateMonetara">
-        <parameter name="languageSelectedP" value="IT"/>
-        <parameter name="currencySelectedP" value="¥"/>
+<!--    <test name="SchimbareLimbaSauUnitateMonetara">-->
+<!--        <parameter name="languageSelectedP" value="IT"/>-->
+<!--        <parameter name="currencySelectedP" value="¥"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="FiltrareBrandTest">-->
+<!--        <parameter name="brandFilterP1" value="Steinway"/>-->
+<!--        <parameter name="brandFilterP2" value="Sons"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.FiltrareBrandTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="ProdusInCosTest">
         <classes>
-            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>
+            <class name="com.thomann.ProdusInCosTest"></class>
         </classes>
     </test>
 </suite>
