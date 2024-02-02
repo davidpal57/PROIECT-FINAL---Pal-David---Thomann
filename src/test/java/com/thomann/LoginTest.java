@@ -12,7 +12,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class AfisareLinkListTest {
+public class LoginTest {
+    //username: tld0rt+7ge8vc33z4vkk@sharklasers.com
+    //password: acEastAestePar0lamEAunicA:)
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     @BeforeTest
@@ -31,10 +33,25 @@ public class AfisareLinkListTest {
         sleep(2000);
     }
     @Test
-    @Parameters({"linkFromListP"})
-    public void linkList(String linkFromList) {
-        WebElement homepageList = driver.findElement(By.className("link-list"));
-        Assert.assertTrue(homepageList.getText().contains(linkFromList));
+    @Parameters({"usernameP", "passwordP", "nameP", "fullNameP"})
+    public void login(String username, String password, String name, String fullName) {
+        WebElement loginMenuButton = driver.findElement(By.className("js-user-navigation-customer-center"));
+        loginMenuButton.click();
+        sleep(1000);
+        WebElement usernameInput = driver.findElement(By.id("uname"));
+        usernameInput.sendKeys(username);
+        WebElement passwordInput = driver.findElement(By.id("passw"));
+        passwordInput.sendKeys(password);
+        WebElement loginButton = driver.findElement(By.className("login__submit"));
+        loginButton.click();
+        sleep(2000);
+        WebElement homeGreetingMessage = driver.findElement(By.xpath("//div[@class=\"home-greeter\"]/h2"));
+        Assert.assertTrue(homeGreetingMessage.getText().contains(name));
+        WebElement userMenuButton = driver.findElement(By.xpath("//a[@aria-expanded=\"false\"]"));
+        userMenuButton.click();
+        sleep(1000);
+        WebElement userAccountFullName = driver.findElement(By.className("mythomann-flyin-customer-info"));
+        Assert.assertTrue(userAccountFullName.getText().contains(fullName));
     }
     @AfterTest(alwaysRun = true)
     public void tearDown(){

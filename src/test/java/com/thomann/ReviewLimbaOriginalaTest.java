@@ -7,9 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -19,7 +18,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class ProdusInCosTest {
+public class ReviewLimbaOriginalaTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     @BeforeTest
@@ -38,8 +37,8 @@ public class ProdusInCosTest {
         sleep(2000);
     }
     @Test
-    @Parameters({"basketAmountP", "basketNotificationTxtP"})
-    public void cosProduse(int basketAmount, String basketNotificationTxt) {
+    @Parameters({"revertTranslationP"})
+    public void cosProduse(String revertTranslation) {
         int consentPopup = 0;
         WebElement mostSelledBrandProducts = driver.findElement(By.xpath("//li[@data-identifier=\"tab-topseller-tab-2\"]/a"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -63,10 +62,10 @@ public class ProdusInCosTest {
         finally{
             if (consentPopup>0)
                 System.out.println("Consent popup was closed.");
-            WebElement nameOfProduct = driver.findElement(By.className("product-title__title"));
-            String productName = nameOfProduct.getText();
-            WebElement addInBasketButton = driver.findElement(By.className("call-to-action__action"));
-            addInBasketButton.click(); basketAmount++;
+            js.executeScript("window.scrollBy(0,5000)", "");
+            WebElement reviewsPageButton = driver.findElement(By.xpath("//div[@class=\"product-reviews-detail-teaser\"]/div[2]/a"));
+            reviewsPageButton.click();
+            sleep(2000);
             try {
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
                 WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
@@ -78,18 +77,22 @@ public class ProdusInCosTest {
             } catch (Exception e) {
                 System.out.println("Consent popup was not displayed.");
             }
-            finally{
-                if (consentPopup>1)
+            finally {
+                if (consentPopup > 0)
                     System.out.println("Consent popup was closed.");
-                String basketAmountTxt = Integer.toString(basketAmount);
-                sleep(2000);
-                WebElement productInBasketNotification = driver.findElement(By.xpath("//*[@id=\"notifications-display\"]/div/div/div/div[2]"));
-                Assert.assertTrue(productInBasketNotification.getText().contains(productName + basketNotificationTxt));
-                System.out.println(productName + basketNotificationTxt);
-                WebElement linkToProductInBasket = driver.findElement(By.className("article-information"));
-                Assert.assertTrue(linkToProductInBasket.getText().contains(productName));
-                WebElement numberOfPorductsInBasket = driver.findElement(By.className("user-navigation__basket-amount"));
-                Assert.assertTrue(numberOfPorductsInBasket.getText().contains(basketAmountTxt));
+                js.executeScript("window.scrollBy(0,400)", "");
+                Select dropdown = new Select(driver.findElement(By.name("reviewlang[]")));
+                WebElement dropdownButtonClick = driver.findElement(By.xpath("//form[@class=\"js-reviews-form\"]/div/div[3]"));
+                dropdownButtonClick.click();
+                sleep(1000);
+                WebElement dropdownLanguageSelect = driver.findElement(By.xpath("//form[@class=\"js-reviews-form\"]/div/div[3]/div/div[2]/div[2]/div/div[2]"));
+                dropdownLanguageSelect.click();
+                sleep(1000);
+                WebElement translateReviewToselectedLanguageButton = driver.findElement(By.xpath("//div[@class=\"product-reviews-content__reviews js-reviews\"]/div[1]/div[1]/div/div[1]/a"));
+                translateReviewToselectedLanguageButton.click();
+                sleep(1000);
+                WebElement revertReviewTranslationButton = driver.findElement(By.xpath("//div[@class=\"product-reviews-content__reviews js-reviews\"]/div[1]/div[1]/div/div[2]/a"));
+                Assert.assertTrue(revertReviewTranslationButton.getText().contains(revertTranslation));
             }
         }
     }
