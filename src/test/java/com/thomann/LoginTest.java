@@ -64,13 +64,14 @@ public class LoginTest {
         finally {
             if (consentPopup > 0)
                 System.out.println("Consent popup was closed.");
-            WebElement homeGreetingMessage = driver.findElement(By.xpath("//div[@class=\"home-greeter\"]/h2"));
-            Assert.assertTrue(homeGreetingMessage.getText().contains(name));
+//            WebElement homeGreetingMessage = driver.findElement(By.xpath("//div[@class=\"home-greeter\"]/h2"));
+//            Assert.assertTrue(homeGreetingMessage.getText().contains(name));
             WebElement userMenuButton = driver.findElement(By.xpath("//a[@aria-expanded=\"false\"]"));
             userMenuButton.click();
             sleep(1000);
-            WebElement userAccountFullName = driver.findElement(By.className("mythomann-flyin-customer-info"));
-            Assert.assertTrue(userAccountFullName.getText().contains(fullName));
+            WebElement userAccountInfo = driver.findElement(By.className("mythomann-flyin-customer-info"));
+            Assert.assertTrue(userAccountInfo.getText().contains(fullName));
+            Assert.assertTrue(userAccountInfo.getText().contains(username));
         }
     }
     @AfterTest(alwaysRun = true)

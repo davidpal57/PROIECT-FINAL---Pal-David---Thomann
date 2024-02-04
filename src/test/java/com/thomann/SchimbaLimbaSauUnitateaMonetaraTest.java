@@ -34,8 +34,8 @@ public class SchimbaLimbaSauUnitateaMonetaraTest {
         sleep(2000);
     }
     @Test
-    @Parameters({"languageSelectedP", "currencySelectedP"})
-    public void chooseCountry(String languageSelected, String currencySelected) {
+    @Parameters({"languageSelectedP", "currencySelectedP", "countrySelectedP"})
+    public void chooseCountry(String languageSelected, String currencySelected, String countrySelected) {
         int consentPopUp = 0;
         WebElement countryMenuButton = driver.findElement(By.className("shop-country"));
         countryMenuButton.click(); sleep(2000);
@@ -80,9 +80,11 @@ public class SchimbaLimbaSauUnitateaMonetaraTest {
         finally {
             if(consentPopUp>0)
                 System.out.println("Consent popup was closed.");
-            WebElement languageAndCurrencyDisplayed = driver.findElement(By.xpath("//div[@role=\"banner\"]/div[3]/div/div[1]"));
-            Assert.assertTrue(languageAndCurrencyDisplayed.getText().contains(languageSelected));
-            Assert.assertTrue(languageAndCurrencyDisplayed.getText().contains(currencySelected));
+            WebElement languageAndCurrencySelected = driver.findElement(By.xpath("//div[@role=\"banner\"]/div[3]/div/div[1]"));
+            Assert.assertTrue(languageAndCurrencySelected.getText().contains(languageSelected));
+            Assert.assertTrue(languageAndCurrencySelected.getText().contains(currencySelected));
+            WebElement countryFlagSelected = driver.findElement(By.className("shop-country__flag"));
+            Assert.assertEquals(countryFlagSelected.getAttribute("src"), countrySelected);
         }
 
 

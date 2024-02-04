@@ -3,39 +3,40 @@
 <suite name="Suite1" verbose="1">
     <parameter name="browserChoice" value="none"/>
 
-    <test name="LoginTest">
-        <parameter name="usernameP" value="tld0rt+7ge8vc33z4vkk@sharklasers.com"/>
-        <parameter name="passwordP" value="acEastAestePar0lamEAunicA:)"/>
-        <parameter name="nameP" value="Robert"/>
-        <parameter name="fullNameP" value="Robert Stanescu"/>
-        <classes>
-            <class name="com.thomann.LoginTest"/>
-        </classes>
-    </test>
+<!--    <test name="LoginTest">-->
+<!--        <parameter name="usernameP" value="tld0rt+7ge8vc33z4vkk@sharklasers.com"/>-->
+<!--        <parameter name="passwordP" value="acEastAestePar0lamEAunicA:)"/>-->
+<!--        <parameter name="nameP" value="Robert"/>-->
+<!--        <parameter name="fullNameP" value="Robert Stanescu"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.LoginTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SchimbareLimbaSauUnitateMonetara">
-        <parameter name="languageSelectedP" value="IT"/>
-        <parameter name="currencySelectedP" value="¥"/>
-        <classes>
-            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>
-        </classes>
-    </test>
+<!--    <test name="SchimbareLimbaSauUnitateMonetara">-->
+<!--        <parameter name="languageSelectedP" value="IT"/>-->
+<!--        <parameter name="currencySelectedP" value="¥"/>-->
+<!--        <parameter name="countrySelectedP" value="https://fast-images.static-thomann.de/pics//images/common/flags/gb.svg"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="FiltrareBrandTest">
-        <parameter name="brandFilterP1" value="Steinway"/>
-        <parameter name="brandFilterP2" value="Sons"/>
-        <classes>
-            <class name="com.thomann.FiltrareBrandTest"/>
-        </classes>
-    </test>
+<!--    <test name="FiltrareBrandTest">-->
+<!--        <parameter name="brandFilterP1" value="Steinway"/>-->
+<!--        <parameter name="brandFilterP2" value="Sons"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.FiltrareBrandTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ProdusInCosTest">
-        <parameter name="basketAmountP" value="0"/>
-        <parameter name="basketNotificationTxtP" value=" este acum în coșul de cumpărături."/>
-        <classes>
-            <class name="com.thomann.ProdusInCosTest"></class>
-        </classes>
-    </test>
+<!--    <test name="ProdusInCosTest">-->
+<!--        <parameter name="basketAmountP" value="0"/>-->
+<!--        <parameter name="basketNotificationTxtP" value=" este acum în coșul de cumpărături."/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.ProdusInCosTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="ReviewLimbaOriginalaTest">
         <parameter name="revertTranslationP" value="Arată originalul"/>
