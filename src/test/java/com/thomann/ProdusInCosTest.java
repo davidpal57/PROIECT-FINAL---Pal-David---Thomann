@@ -61,8 +61,10 @@ public class ProdusInCosTest {
             System.out.println("Consent popup was not displayed.");
         }
         finally{
-            if (consentPopup>0)
+            if (consentPopup>0) {
                 System.out.println("Consent popup was closed.");
+                consentPopup--;
+            }
             WebElement nameOfProduct = driver.findElement(By.className("product-title__title"));
             String productName = nameOfProduct.getText();
             WebElement addInBasketButton = driver.findElement(By.className("call-to-action__action"));
@@ -79,7 +81,7 @@ public class ProdusInCosTest {
                 System.out.println("Consent popup was not displayed.");
             }
             finally{
-                if (consentPopup>1)
+                if (consentPopup>0)
                     System.out.println("Consent popup was closed.");
                 String basketAmountTxt = Integer.toString(basketAmount);
                 sleep(2000);

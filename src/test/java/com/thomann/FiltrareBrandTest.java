@@ -58,24 +58,42 @@ public class FiltrareBrandTest {
             System.out.println("Consent popup was not displayed.");
         }
         finally{
-            if (consentPopup>0)
+            if (consentPopup>0) {
                 System.out.println("Consent popup was closed.");
+                consentPopup--;
+            }
             WebElement grandPianoPage = driver.findElement(By.xpath("//a[@title='Piane de Concert']"));
             new Actions(driver)
                     .scrollToElement(grandPianoPage);
             grandPianoPage.click();
             sleep(2000);
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+                WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
+                wait.until(ExpectedConditions.elementToBeClickable(cookiesButton));
+                if (cookiesButton.isDisplayed())
+                    consentPopup++;
+                cookiesButton.click();
+                sleep(4000);
+            } catch (Exception e) {
+                System.out.println("Consent popup was not displayed.");
+            }
+            finally {
+                if (consentPopup > 0) {
+                    System.out.println("Consent popup was closed.");
+                }
+                WebElement showMoreButton = driver.findElement(By.xpath("//div[@class='fx-collapsible__trigger']"));
+                showMoreButton.click();
+                sleep(2000);
+                WebElement brandSelectCheckbox = driver.findElement(By.xpath("//*[@id=\"Producător\"]/div/div[5]"));
+                brandSelectCheckbox.click();
+                sleep(2000);
+                WebElement brandFilterBox = driver.findElement(By.xpath("//div[@class='filter-chips filter-chips--large']/div/div/div[1]"));
+                Assert.assertTrue(brandFilterBox.getText().contains(brandFilter1));
+                Assert.assertTrue(brandFilterBox.getText().contains(brandFilter2));
+                sleep(2000);
+            }
         }
-        WebElement showMoreButton = driver.findElement(By.xpath("//div[@class='fx-collapsible__trigger']"));
-        showMoreButton.click();
-        sleep(2000);
-        WebElement brandSelectCheckbox = driver.findElement(By.xpath("//*[@id=\"Producător\"]/div/div[5]"));
-        brandSelectCheckbox.click();
-        sleep(2000);
-        WebElement brandFilterBox = driver.findElement(By.xpath("//div[@class='filter-chips filter-chips--large']/div/div/div[1]"));
-        Assert.assertTrue(brandFilterBox.getText().contains(brandFilter1));
-        Assert.assertTrue(brandFilterBox.getText().contains(brandFilter2));
-        sleep(2000);
     }
     @AfterTest(alwaysRun = true)
     public void tearDown(){

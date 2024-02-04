@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +22,8 @@ import java.time.Duration;
 public class ReviewLimbaOriginalaTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
+    //in caz ca nu functioneaza
+//    String url = "https://www.thomann.de/ro/kawai_es_120_b.htm";
     @BeforeTest
     @Parameters({"browserChoice"})
     public void setup(String browser){
@@ -60,10 +63,13 @@ public class ReviewLimbaOriginalaTest {
             System.out.println("Consent popup was not displayed.");
         }
         finally{
-            if (consentPopup>0)
+            if (consentPopup>0) {
                 System.out.println("Consent popup was closed.");
-            js.executeScript("window.scrollBy(0,5000)", "");
+                consentPopup--;
+            }
             WebElement reviewsPageButton = driver.findElement(By.xpath("//div[@class=\"product-reviews-detail-teaser\"]/div[2]/a"));
+            new Actions(driver)
+                    .scrollToElement(reviewsPageButton);
             reviewsPageButton.click();
             sleep(2000);
             try {
@@ -78,10 +84,11 @@ public class ReviewLimbaOriginalaTest {
                 System.out.println("Consent popup was not displayed.");
             }
             finally {
-                if (consentPopup > 0)
+                if (consentPopup > 0) {
                     System.out.println("Consent popup was closed.");
+                }
+//                JavascriptExecutor js = (JavascriptExecutor) driver; //in caz ca nu functioneaza
                 js.executeScript("window.scrollBy(0,400)", "");
-                Select dropdown = new Select(driver.findElement(By.name("reviewlang[]")));
                 WebElement dropdownButtonClick = driver.findElement(By.xpath("//form[@class=\"js-reviews-form\"]/div/div[3]"));
                 dropdownButtonClick.click();
                 sleep(1000);

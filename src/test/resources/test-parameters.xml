@@ -2,6 +2,7 @@
 
 <suite name="Suite1" verbose="1">
     <parameter name="browserChoice" value="none"/>
+
     <test name="LoginTest">
         <parameter name="usernameP" value="tld0rt+7ge8vc33z4vkk@sharklasers.com"/>
         <parameter name="passwordP" value="acEastAestePar0lamEAunicA:)"/>
