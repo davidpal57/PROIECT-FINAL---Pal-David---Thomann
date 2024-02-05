@@ -21,6 +21,7 @@ public class LoginTest {
     //password: acEastAestePar0lamEAunicA:)
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
+    int consentPopup = 0;
     @BeforeTest
     @Parameters({"browserChoice"})
     public void setup(String browser){
@@ -34,41 +35,51 @@ public class LoginTest {
         driver.manage().window().maximize();
         WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
         cookiesButton.click();
+        consentPopup++;
         sleep(2000);
     }
     @Test
     @Parameters({"usernameP", "passwordP", "nameP", "fullNameP"})
     public void login(String username, String password, String name, String fullName) {
-        int consentPopup = 0;
-        WebElement loginMenuButton = driver.findElement(By.className("js-user-navigation-customer-center"));
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertTrue(consentPopup>0);
+        System.out.println("Consent popup was closed");
+        consentPopup--;
+        WebElement loginMenuButton = driver.findElement(By.xpath("//div[@class=\"user-navigation js-user-navigation\"]/div[2]/a"));
         loginMenuButton.click();
         sleep(1000);
+        Assert.assertEquals(loginMenuButton.getAttribute("aria-expanded"), "true");
         WebElement usernameInput = driver.findElement(By.id("uname"));
         usernameInput.sendKeys(username);
         WebElement passwordInput = driver.findElement(By.id("passw"));
         passwordInput.sendKeys(password);
         WebElement loginButton = driver.findElement(By.className("login__submit"));
         loginButton.click();
+        WebElement loadingImage = driver.findElement(By.xpath("//form[@id=\"flyin-login-form\"]/div[1]/div[7]/img"));
+        Assert.assertTrue(loadingImage.isDisplayed());
         sleep(2000);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
             wait.until(ExpectedConditions.elementToBeClickable(cookiesButton));
             if (cookiesButton.isDisplayed())
                 consentPopup++;
             cookiesButton.click();
-            sleep(4000);
+            sleep(2000);
         } catch (Exception e) {
             System.out.println("Consent popup was not displayed.");
         }
         finally {
-            if (consentPopup > 0)
+            if (consentPopup > 0) {
                 System.out.println("Consent popup was closed.");
+                Assert.assertTrue(consentPopup > 0);
+            }
 //            WebElement homeGreetingMessage = driver.findElement(By.xpath("//div[@class=\"home-greeter\"]/h2"));
 //            Assert.assertTrue(homeGreetingMessage.getText().contains(name));
-            WebElement userMenuButton = driver.findElement(By.xpath("//a[@aria-expanded=\"false\"]"));
+            WebElement userMenuButton = driver.findElement(By.xpath("//div[@class=\"user-navigation js-user-navigation\"]/div[2]/a"));
             userMenuButton.click();
             sleep(1000);
+            Assert.assertEquals(userMenuButton.getAttribute("aria-expanded"), "true");
             WebElement userAccountInfo = driver.findElement(By.className("mythomann-flyin-customer-info"));
             Assert.assertTrue(userAccountInfo.getText().contains(fullName));
             Assert.assertTrue(userAccountInfo.getText().contains(username));

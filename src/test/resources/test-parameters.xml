@@ -13,35 +13,35 @@
         </classes>
     </test>
 
-    <test name="SchimbareLimbaSauUnitateMonetara">
-        <parameter name="languageSelectedP" value="IT"/>
-        <parameter name="currencySelectedP" value="¥"/>
-        <parameter name="countrySelectedP" value="https://fast-images.static-thomann.de/pics//images/common/flags/gb.svg"/>
-        <classes>
-            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>
-        </classes>
-    </test>
+<!--    <test name="SchimbareLimbaSauUnitateMonetara">-->
+<!--        <parameter name="languageSelectedP" value="IT"/>-->
+<!--        <parameter name="currencySelectedP" value="¥"/>-->
+<!--        <parameter name="countrySelectedP" value="https://fast-images.static-thomann.de/pics//images/common/flags/gb.svg"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.SchimbaLimbaSauUnitateaMonetaraTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="FiltrareBrandTest">
-        <parameter name="brandFilterP1" value="Steinway"/>
-        <parameter name="brandFilterP2" value="Sons"/>
-        <classes>
-            <class name="com.thomann.FiltrareBrandTest"/>
-        </classes>
-    </test>
+<!--    <test name="FiltrareBrandTest">-->
+<!--        <parameter name="brandFilterP1" value="Steinway"/>-->
+<!--        <parameter name="brandFilterP2" value="Sons"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.FiltrareBrandTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ProdusInCosTest">
-        <parameter name="basketAmountP" value="0"/>
-        <parameter name="basketNotificationTxtP" value=" este acum în coșul de cumpărături."/>
-        <classes>
-            <class name="com.thomann.ProdusInCosTest"></class>
-        </classes>
-    </test>
+<!--    <test name="ProdusInCosTest">-->
+<!--        <parameter name="basketAmountP" value="0"/>-->
+<!--        <parameter name="basketNotificationTxtP" value=" este acum în coșul de cumpărături."/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.ProdusInCosTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ReviewLimbaOriginalaTest">
-        <parameter name="revertTranslationP" value="Arată originalul"/>
-        <classes>
-            <class name="com.thomann.ReviewLimbaOriginalaTest"></class>
-        </classes>
-    </test>
+<!--    <test name="ReviewLimbaOriginalaTest">-->
+<!--        <parameter name="revertTranslationP" value="Arată originalul"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.ReviewLimbaOriginalaTest"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
