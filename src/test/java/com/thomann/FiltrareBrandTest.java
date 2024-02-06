@@ -21,6 +21,7 @@ import java.time.Duration;
 public class FiltrareBrandTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
+    int consentPopup = 0;
     @BeforeTest
     @Parameters({"browserChoice"})
     public void setup(String browser){
@@ -34,18 +35,28 @@ public class FiltrareBrandTest {
         driver.manage().window().maximize();
         WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
         cookiesButton.click();
+        consentPopup++;
         sleep(2000);
     }
     @Test
     @Parameters({"brandFilterP1", "brandFilterP2"})
     public void filtrareBrand(String brandFilter1, String brandFilter2) {
-        int consentPopup = 0;
-        WebElement navigationMenu = driver.findElement(By.className("fx-size--medium"));
-        navigationMenu.click();
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+        System.out.println("The application is open.");
+        Assert.assertTrue(consentPopup>0);
+        System.out.println("Consent popup was closed.");
+        consentPopup--;
+        WebElement navigationMenuButton = driver.findElement(By.className("fx-size--medium"));
+        navigationMenuButton.click();
+        WebElement navigationMenu = driver.findElement(By.id("fx-flyin-main"));
+        Assert.assertEquals(navigationMenu.getAttribute("aria-hidden"),"false");
+        System.out.println("The navigation menu is now open.");
         sleep(1000);
         WebElement navigationKeysPage = driver.findElement(By.xpath("//*[@id=\"drilldown-menu-productCategories\"]/ul/li[3]/a"));
         navigationKeysPage.click();
-        sleep(1000);
+        sleep(1500);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.thomann.de/ro/claviaturi1.html");
+        System.out.println("The requested page has been opened");
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
             WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
@@ -56,42 +67,53 @@ public class FiltrareBrandTest {
             sleep(4000);
         } catch (Exception e) {
             System.out.println("Consent popup was not displayed.");
+            Assert.assertEquals(consentPopup, 0);
         }
-        finally{
-            if (consentPopup>0) {
+        finally {
+            if(consentPopup>0) {
                 System.out.println("Consent popup was closed.");
+                Assert.assertTrue(consentPopup > 0);
                 consentPopup--;
             }
             WebElement grandPianoPage = driver.findElement(By.xpath("//a[@title='Piane de Concert']"));
             new Actions(driver)
                     .scrollToElement(grandPianoPage);
             grandPianoPage.click();
-            sleep(2000);
+            Assert.assertEquals(driver.getCurrentUrl(), "https://www.thomann.de/ro/piane_de_concert.html");
+            System.out.println("The requested page has been opened.");
+            sleep(1000);
             try {
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
                 WebElement cookiesButton = driver.findElement(By.className("js-decline-all-cookies"));
                 wait.until(ExpectedConditions.elementToBeClickable(cookiesButton));
                 if (cookiesButton.isDisplayed())
                     consentPopup++;
                 cookiesButton.click();
-                sleep(4000);
+                sleep(2000);
             } catch (Exception e) {
                 System.out.println("Consent popup was not displayed.");
+                Assert.assertEquals(consentPopup, 0);
             }
             finally {
-                if (consentPopup > 0) {
+                if(consentPopup>0) {
                     System.out.println("Consent popup was closed.");
+                    Assert.assertTrue(consentPopup > 0);
                 }
                 WebElement showMoreButton = driver.findElement(By.xpath("//div[@class='fx-collapsible__trigger']"));
                 showMoreButton.click();
-                sleep(2000);
+                WebElement showLessButton = driver.findElement(By.xpath("//div[@class=\"fx-collapsible fx-collapsible--open\"]/div[2]/span"));
+                Assert.assertTrue(showLessButton.getText().contains("ARATĂ MAI PUȚIN"));
+                System.out.println("All available product brands are shown.");
+                sleep(1000);
                 WebElement brandSelectCheckbox = driver.findElement(By.xpath("//*[@id=\"Producător\"]/div/div[5]"));
                 brandSelectCheckbox.click();
-                sleep(2000);
+                sleep(1000);
+                Assert.assertTrue(driver.getCurrentUrl().contains("Steinway"));
+                System.out.println("The products have been filtered and the name of the brand selected can be found in the current link.");
                 WebElement brandFilterBox = driver.findElement(By.xpath("//div[@class='filter-chips filter-chips--large']/div/div/div[1]"));
                 Assert.assertTrue(brandFilterBox.getText().contains(brandFilter1));
                 Assert.assertTrue(brandFilterBox.getText().contains(brandFilter2));
-                sleep(2000);
+                System.out.println("The filter box can be found above the first product containing the name of the brand selected.");
             }
         }
     }

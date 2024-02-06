@@ -42,13 +42,15 @@ public class LoginTest {
     @Parameters({"usernameP", "passwordP", "nameP", "fullNameP"})
     public void login(String username, String password, String name, String fullName) {
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        System.out.println("The application is open.");
         Assert.assertTrue(consentPopup>0);
-        System.out.println("Consent popup was closed");
+        System.out.println("Consent popup was closed.");
         consentPopup--;
         WebElement loginMenuButton = driver.findElement(By.xpath("//div[@class=\"user-navigation js-user-navigation\"]/div[2]/a"));
         loginMenuButton.click();
         sleep(1000);
         Assert.assertEquals(loginMenuButton.getAttribute("aria-expanded"), "true");
+        System.out.println("The login menu has been opened.");
         WebElement usernameInput = driver.findElement(By.id("uname"));
         usernameInput.sendKeys(username);
         WebElement passwordInput = driver.findElement(By.id("passw"));
@@ -57,6 +59,7 @@ public class LoginTest {
         loginButton.click();
         WebElement loadingImage = driver.findElement(By.xpath("//form[@id=\"flyin-login-form\"]/div[1]/div[7]/img"));
         Assert.assertTrue(loadingImage.isDisplayed());
+        System.out.println("The username and password have been entered and the website is processing the login request into the user's account.");
         sleep(2000);
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
@@ -68,6 +71,7 @@ public class LoginTest {
             sleep(2000);
         } catch (Exception e) {
             System.out.println("Consent popup was not displayed.");
+            Assert.assertEquals(consentPopup, 0);
         }
         finally {
             if (consentPopup > 0) {
@@ -80,9 +84,11 @@ public class LoginTest {
             userMenuButton.click();
             sleep(1000);
             Assert.assertEquals(userMenuButton.getAttribute("aria-expanded"), "true");
+            System.out.println("The menu has opened.");
             WebElement userAccountInfo = driver.findElement(By.className("mythomann-flyin-customer-info"));
             Assert.assertTrue(userAccountInfo.getText().contains(fullName));
             Assert.assertTrue(userAccountInfo.getText().contains(username));
+            System.out.println("The user's information has been displayed.");
         }
     }
     @AfterTest(alwaysRun = true)

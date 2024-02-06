@@ -3,15 +3,15 @@
 <suite name="Suite1" verbose="1">
     <parameter name="browserChoice" value="none"/>
 
-    <test name="LoginTest">
-        <parameter name="usernameP" value="tld0rt+7ge8vc33z4vkk@sharklasers.com"/>
-        <parameter name="passwordP" value="acEastAestePar0lamEAunicA:)"/>
-        <parameter name="nameP" value="Robert"/>
-        <parameter name="fullNameP" value="Robert Stanescu"/>
-        <classes>
-            <class name="com.thomann.LoginTest"/>
-        </classes>
-    </test>
+<!--    <test name="LoginTest">-->
+<!--        <parameter name="usernameP" value="tld0rt+7ge8vc33z4vkk@sharklasers.com"/>-->
+<!--        <parameter name="passwordP" value="acEastAestePar0lamEAunicA:)"/>-->
+<!--        <parameter name="nameP" value="Robert"/>-->
+<!--        <parameter name="fullNameP" value="Robert Stanescu"/>-->
+<!--        <classes>-->
+<!--            <class name="com.thomann.LoginTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="SchimbareLimbaSauUnitateMonetara">-->
 <!--        <parameter name="languageSelectedP" value="IT"/>-->
@@ -38,10 +38,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="ReviewLimbaOriginalaTest">-->
-<!--        <parameter name="revertTranslationP" value="Arată originalul"/>-->
-<!--        <classes>-->
-<!--            <class name="com.thomann.ReviewLimbaOriginalaTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="ReviewLimbaOriginalaTest">
+        <parameter name="revertTranslationP" value="Arată originalul"/>
+        <classes>
+            <class name="com.thomann.ReviewLimbaOriginalaTest"></class>
+        </classes>
+    </test>
 </suite>
