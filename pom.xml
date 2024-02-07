@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.thomann</groupId>
-    <artifactId>ProiectAzimut-Thomann</artifactId>
+    <artifactId>de</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
