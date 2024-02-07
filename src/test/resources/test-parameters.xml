@@ -34,7 +34,7 @@
         <parameter name="basketAmountP" value="0"/>
         <parameter name="basketNotificationTxtP" value=" este acum în coșul de cumpărături."/>
         <classes>
-            <class name="com.thomann.ProductInBasketTest"></class>
+            <class name="com.thomann.ProductInBasketTest"/>
         </classes>
     </test>
 
