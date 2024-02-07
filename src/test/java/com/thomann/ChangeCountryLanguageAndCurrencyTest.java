@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class SchimbaLimbaSauUnitateaMonetaraTest {
+public class ChangeCountryLanguageAndCurrencyTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     int consentPopup = 0;

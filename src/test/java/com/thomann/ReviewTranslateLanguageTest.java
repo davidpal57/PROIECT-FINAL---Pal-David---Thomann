@@ -9,7 +9,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -19,7 +18,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class ReviewLimbaOriginalaTest {
+public class ReviewTranslateLanguageTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     //in caz ca nu functioneaza

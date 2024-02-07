@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class ProdusInCosTest {
+public class ProductInBasketTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     int consentPopup = 0;

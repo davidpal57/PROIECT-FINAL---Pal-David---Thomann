@@ -1,7 +1,6 @@
 package com.thomann;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class FiltrareBrandTest {
+public class BrandFilterTest {
     WebDriver driver;
     String url = "https://www.thomann.de/ro/index.html";
     int consentPopup = 0;
